@@ -1,7 +1,6 @@
 import json
 import os
 
-#from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
 from authapp.models import ShopUser
@@ -28,11 +27,11 @@ class Command(BaseCommand):
 
         Product.objects.all().delete()
         for product in products:
-            category_name = product["category"]
+            category_name = product['category']
             _category = ProductCategory.objects.get(name=category_name)
             product['category'] = _category
             new_product = Product(**product)
             new_product.save()
-        #User.objects.create_superuser('admin', 'admin@django.com', '123')
-        ShopUser.objects.create_superuser('django', 'admin@django.com', '123', age=28)
+
+        ShopUser.objects.create_superuser('admin', 'admin@django.com', '123', age=28)
 

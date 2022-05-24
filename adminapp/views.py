@@ -38,6 +38,7 @@ class UsersListView(LoginRequiredMixin, ListView):
 
         return context
 
+
 # @user_passes_test(lambda u: u.is_superuser)
 # def user_create(request):
 #     title = 'пользователи/создать'

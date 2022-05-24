@@ -1,6 +1,5 @@
-from django.db import models
-
 from django.conf import settings
+from django.db import models
 
 from mainapp.models import Product
 
@@ -9,7 +8,7 @@ class Basket(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='basket'
+        related_name='basket',
     )
     product = models.ForeignKey(
         Product,
@@ -36,4 +35,3 @@ class Basket(models.Model):
         _items = Basket.objects.filter(user=self.user)
         _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
         return _totalcost
-
