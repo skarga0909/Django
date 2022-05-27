@@ -3,13 +3,13 @@ from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy,reverse
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
+from basketapp.models import Basket
 from ordersapp.forms import OrderItemForm
 from ordersapp.models import Order, OrderItem
-from basketapp.models import Basket
 
 
 class OrderList(ListView):
@@ -39,7 +39,7 @@ class OrderCreate(CreateView):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
                     form.initial['price'] = basket_items[num].product.price
-                basket_items.delete()
+                    basket_items[num].delete()
             else:
                 formset = OrderFormSet()
 
